@@ -1,0 +1,80 @@
+#!/bin/sh
+#
+# @name Flipping Wing Stop-Rotor Aircraft
+
+# @url https://www.google.com/imgres?imgurl=https%3A%2F%2Fi0.wp.com%2Fwww.suasnews.com%2Fwp-content%2Fuploads%2F2016%2F11%2FStopRotor-Rotary.jpg%3Ffit%3D1000%252C667%26ssl%3D1&tbnid=Cid2Xc2Pgp8yaM&vet=12ahUKEwitxtbH6rb-AhWBJGIAHaAlDFMQMygBegUIARDKAQ..i&imgrefurl=https%3A%2F%2Fwww.suasnews.com%2F2016%2F11%2Fstoprotor%2F&docid=oBHJMWIwpcmv2M&w=1000&h=667&q=stoprotor%20aircraft&ved=2ahUKEwitxtbH6rb-AhWBJGIAHaAlDFMQMygBegUIARDKAQ
+#
+# @type Stop-Rotor
+# @class VTOL Stop-Rotor
+#
+# @output MAIN1 main rotor throttle
+# @output MAIN2 right counterbalance angle
+# @output MAIN3 right counterbalance throttle
+# @output MAIN4 left counterbalance angle
+# @output MAIN5 left counterbalance throttle
+#
+# @maintainer Kristan Hilby <kmhilby@mit.edu>
+# @board px4_fmu-v2 exclude
+# @board bitcraze_crazyflie exclude
+#
+
+. ${R}etc/init.d/rc.stoprotor_defaults
+
+param set-default CA_AIRFRAME 9
+param set-default CA_ROTOR_COUNT 5
+
+# Rotor 0 is main rotor throttle
+param set-default CA_ROTOR0_KM -0.05
+param set-default CA_ROTOR0_PX 0.2
+param set-default CA_ROTOR0_PY 0.2
+param set-default CA_ROTOR0_PZ 0.2
+param set-default CA_ROTOR0_TILT 0
+
+# Rotor 1 is the right CB propeller
+param set-default CA_ROTOR1_KM -0.05
+param set-default CA_ROTOR1_PX 0.2
+param set-default CA_ROTOR1_PY 0.2
+param set-default CA_ROTOR1_PZ 0.2
+param set-default CA_ROTOR1_TILT 1
+
+# Rotor 2 is the left CB propeller
+param set-default CA_ROTOR2_KM -0.05
+param set-default CA_ROTOR2_PX 0.2
+param set-default CA_ROTOR2_PY 0.2
+param set-default CA_ROTOR2_PZ 0.2
+param set-default CA_ROTOR2_TILT 2
+
+# Rotor 3 is the left CB angle (servo)
+param set-default CA_ROTOR3_KM -0.05
+param set-default CA_ROTOR3_PX 0.2
+param set-default CA_ROTOR3_PY 0.2
+param set-default CA_ROTOR3_PZ 0.2
+param set-default CA_ROTOR3_TILT 1
+
+# Rotor 4 is the right CB angle (servo)
+param set-default CA_ROTOR4_KM -0.05
+param set-default CA_ROTOR4_PX 0.2
+param set-default CA_ROTOR4_PY 0.2
+param set-default CA_ROTOR4_PZ 0.2
+param set-default CA_ROTOR4_TILT 1
+
+param set-default VT_ELEV_MC_LOCK 0
+param set-default VT_MOT_COUNT 6
+param set-default VT_TYPE 2
+param set-default VT_FW_DIFTHR_EN 1
+
+# set SYS_HITL to 2 to start the SIH and avoid sensors startup
+#param set-default SYS_HITL 2
+
+param set SIH_MASS 0.2
+
+param set SIH_T_MAX 2.0
+param set SIH_Q_MAX 0.0165
+param set SIH_IXX 0.00354
+param set SIH_IYY 0.000625
+param set SIH_IZZ 0.00300
+param set SIH_IXZ 0.0 
+
+param set SIH_KDV 0.2 # First order drag coefficient
+
+set MIXER stoprotor
