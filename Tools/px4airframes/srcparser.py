@@ -105,6 +105,8 @@ class AirframeGroup(object):
             return "Boat"
         elif (self.type == "Balloon"):
             return "Balloon"
+        elif (self.type == "Stop-Rotor"):
+            return "Stoprotor"
         elif (self.type == "Vectored 6 DOF UUV"):
             return "Vectored6DofUUV"
         return "AirframeUnknown"
