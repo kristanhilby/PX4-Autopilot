@@ -15,8 +15,8 @@
 .~lock.*
 Testing/
 Packages/*
-build/*
-build_*/
+# build/*
+# build_*/
 cscope.out
 cscope.in.out
 cscope.po.out
